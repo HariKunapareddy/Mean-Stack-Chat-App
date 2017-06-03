@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Application</title>
+
+    <!--
+        Displaying chat list starts
+    -->
+    <div class="userlist">
+
+        <!--
+            Using ng-repeat to show users starts
+        -->
+        <div class="userlist-single" ng-repeat="singleuser in userlist"
+             ng-click="hightlight_user(singleuser)"
+             ng-class="(hightlight_id==singleuser.id ? 'hightlight_user_class' :'')"
+             ng-style="{
+							'display': uid==singleuser.id ? 'none' :''
+						}">
+            <!--
+                Showing users name, profile Image and online status
+            -->
+            <div class="userlist-user-meta">
+                <img class="img-circle" ng-src="{{singleuser.p_photo}}"/>
+                <span class="online-user-status"
+                      ng-class="(singleuser.online=='Y' ? 'status-online' :'status-offline')"
+                ></span>
+                <span title="{{singleuser.socketId}}" class="userlist-userName">{{singleuser.name}}</span>
+                <!--
+                    Span to show 'Typing indicator'
+                -->
+                <span id="isTyping_{{singleuser.id}}" class="is-typing">is typing...</span>
+            </div>
+        </div>
+        <!--
+            Using ng-repeat to show users ends
+        -->
+
+        <!--
+            Showing alert when no user avalibale for chat
+        -->
+        <div ng-show="userlist.length == 1 && userlist[0].name==show_userinfo.data.name"  >
+            <div class="alert alert-danger" >
+                <p class="text-center" >
+                    Everyone is offline.
+                    <br/><br/>
+                    Share this url and Tell your friends to come online.
+                </p >
+            </div >
+        </div>
+
+    </div>
+    <!--
+        Displaying chat list ends
+</head>
+<body>
+
+</body>
+</html>
